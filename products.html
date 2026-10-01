@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>パーツを探す｜ハーレーダビッドソン パーツ通販 THIRD PLACE</title>
+  <meta name="description" content="ハーレーダビッドソンのパーツを車種・年式・カテゴリー・ブランド・品番から検索。マフラー、ハンドル、純正補修部品、廃盤パーツ、ダイヤモンドカット加工品まで。">
+  <meta name="theme-color" content="#0c0c0b">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body data-page="products">
+  <a class="skip-link" href="#main">本文へスキップ</a>
+  <div data-chrome="header"></div>
+
+  <main id="main" class="page-fade">
+    <section class="page-hero">
+      <div class="container">
+        <nav aria-label="パンくずリスト"><ol class="breadcrumb"><li><a href="index.html">HOME</a></li><li>パーツを探す</li></ol></nav>
+        <h1 class="page-hero__title"><span class="visually-hidden">ハーレーダビッドソン パーツを探す — </span>ONLINE STORE</h1>
+        <p class="page-hero__lead">車種・カテゴリー・品番から。気になるパーツは、購入前に適合を相談できます。</p>
+      </div>
+    </section>
+
+    <section class="shop" aria-label="商品一覧">
+      <div class="container">
+        <form class="shop__search" role="search" data-search-form>
+          <label class="visually-hidden" for="q">キーワード・品番で検索</label>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input class="input" type="search" id="q" name="q" placeholder="商品名・ブランド・品番（例：16770-84D）" autocomplete="off" enterkeyhint="search">
+        </form>
+        <div class="type-chips" role="group" aria-label="状態で絞り込み" data-type-chips></div>
+
+        <div class="shop__bar">
+          <p class="shop__count" aria-live="polite"><b data-count>0</b>件</p>
+          <div class="shop__bar-actions">
+            <button class="filter-btn" type="button" data-open-filters aria-controls="filters" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+              絞り込み<span class="filter-btn__count" data-filter-count></span>
+            </button>
+            <label class="visually-hidden" for="sort">並び替え</label>
+            <select class="select" id="sort" data-filter="sort">
+              <option value="recommended">おすすめ順</option>
+              <option value="new">新着順</option>
+              <option value="price-asc">価格が安い順</option>
+              <option value="price-desc">価格が高い順</option>
+            </select>
+          </div>
+        </div>
+        <div class="active-filters" data-active-filters></div>
+
+        <div class="shop__layout">
+          <aside class="filters" id="filters" aria-label="絞り込み条件">
+            <div class="filters__head">
+              <h2>絞り込み</h2>
+              <button class="icon-btn" type="button" data-close-filters aria-label="閉じる">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+              </button>
+            </div>
+            <div class="filters__group">
+              <label class="filters__label" for="f-model">車種</label>
+              <select class="select" id="f-model" data-filter="model"></select>
+            </div>
+            <div class="filters__group">
+              <label class="filters__label" for="f-cat">カテゴリー</label>
+              <select class="select" id="f-cat" data-filter="cat"></select>
+            </div>
+            <div class="filters__group">
+              <label class="filters__label" for="f-brand">ブランド</label>
+              <select class="select" id="f-brand" data-filter="brand"></select>
+            </div>
+            <div class="filters__group">
+              <label class="filters__label" for="f-source">純正 / 社外</label>
+              <select class="select" id="f-source" data-filter="source">
+                <option value="">すべて</option>
+                <option value="oem">純正品</option>
+                <option value="aftermarket">社外品</option>
+                <option value="original">ショップオリジナル</option>
+              </select>
+            </div>
+            <div class="filters__group">
+              <label class="filters__label" for="f-price">価格帯</label>
+              <select class="select" id="f-price" data-filter="price">
+                <option value="">すべて</option>
+                <option value="0-5000">〜5,000円</option>
+                <option value="5000-30000">5,000〜30,000円</option>
+                <option value="30000-100000">30,000〜100,000円</option>
+                <option value="100000-">100,000円〜</option>
+              </select>
+            </div>
+            <div class="filters__foot">
+              <button class="btn btn--line" type="button" data-clear-filters>クリア</button>
+              <button class="btn btn--primary" type="button" data-close-filters><span data-apply-label>表示する</span></button>
+            </div>
+          </aside>
+          <div class="sheet-backdrop" data-close-filters></div>
+
+          <div>
+            <div class="product-grid" data-results></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-chrome="footer"></div>
+
+  <script src="data/products.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/products.js" defer></script>
+</body>
+</html>
