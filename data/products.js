@@ -140,7 +140,7 @@ window.TP_DATA = {
       summary: "Thrashin Supplyのカバーに、当店でダイヤモンドカットを施した一品。",
       description: [
         "M8ソフテイル（2018年以降）用のフロントブレーキマスターシリンダーカバー。",
-        "この商品をダイヤモンドカットして販売しているのは当店だけです。加工していない通常品は16,000〜18,000円で販売されています。",
+        "当店でダイヤモンドカット加工を施した商品です。加工していない通常品は16,000〜18,000円で販売されています。",
         "取り付けねじ付属。ガスケットは純正を再利用します。"
       ],
       specs: { partNumber: null, oemNumber: null, color: "ブラック × ダイヤモンドカット", conditionNote: "新品", accessories: "取り付けねじ" },
@@ -252,7 +252,7 @@ window.TP_DATA = {
       price: 110000,
       inventory: 1,
       images: [{ src: "ca1_155_1.jpg", alt: "SAMSON フィッシュテイル スリップオンマフラーを装着したハーレー", fit: "contain" }],
-      summary: "廃盤・在庫限り。これを逃すと手に入らない、人気のフィッシュテイル。",
+      summary: "廃盤・在庫限り。人気のフィッシュテイル。",
       description: [
         "廃盤のため在庫限りです。スリップオンなので、ノーマルのエキパイと組み合わせて使えます。社外の独立管とも組み合わせ可能です。",
         "長さは33インチと36インチがあり、こちらは33インチ。それでもサドルバッグ後方にエンドが伸びるので、旋回時・停止時はご注意ください。"
@@ -274,8 +274,8 @@ window.TP_DATA = {
       price: 129800,
       inventory: 1,
       images: [{ src: "ca1_85_1.jpg", alt: "クロームワークス スラッシュカット フルエキゾースト クローム", fit: "contain" }],
-      summary: "廃盤・もう手に入らない一本。クロームワークス独特の重低音。",
-      description: ["廃盤になっており、もう手に入りません。クロームワークス独特の重低音が魅力のフルエキゾーストです。"],
+      summary: "廃盤・在庫限りの一本。クロームワークス独特の重低音。",
+      description: ["廃盤のため、今では入手しにくいフルエキゾーストです。クロームワークス独特の重低音が魅力です。"],
       specs: { partNumber: null, oemNumber: null, color: "クローム", conditionNote: "新品・廃盤在庫", accessories: null },
       fitment: { models: ["sportster"], years: "2004–2017", note: "2004〜2017 スポーツスター" },
       sourceUrl: "https://thirdplace.cart.fc2.com/ca1/85/p-r-s/",
