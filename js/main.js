@@ -152,7 +152,7 @@
   const NAV = [
     { href: "products.html", en: "SHOP", jp: "パーツを探す", key: "products" },
     { href: "products.html?type=rare", en: "RARE & VINTAGE", jp: "廃盤・希少パーツ", key: "" },
-    { href: "index.html#diamond-cut", en: "DIAMOND CUT", jp: "ダイヤモンドカット加工", key: "" },
+    { href: "diamond-heads/", en: "DIAMOND CUT", jp: "ダイヤモンドカット", key: "diamond" },
     { href: "about.html", en: "ABOUT", jp: "THIRD PLACEについて", key: "about" },
     { href: "contact.html", en: "CONTACT", jp: "適合相談・お問い合わせ", key: "contact" }
   ];
@@ -160,7 +160,7 @@
   function headerHTML() {
     const cur = (n) => (n.key && n.key === page ? ' aria-current="page"' : "");
     return '<div class="demo-bar" role="note"><strong>DEMO SITE</strong>提案用デモ｜商品情報は' + esc(DATA.meta.fetchedAt.replace(/-/g, "/")) + '時点</div>' +
-      '<header class="site-header' + (page === "home" ? " site-header--overlay" : "") + '" id="top">' +
+      '<header class="site-header' + (page === "home" || page === "diamond" ? " site-header--overlay" : "") + '" id="top">' +
         '<div class="container site-header__inner">' +
           '<a class="logo" href="index.html" aria-label="THIRD PLACE トップページ">' + LOGO_MARK +
             '<span class="logo__text"><span class="logo__name">THIRD PLACE</span><span class="logo__sub">HARLEY PARTS &amp; CUSTOM</span></span></a>' +
@@ -205,7 +205,7 @@
         "</dl></div>" +
         '<div><h2 class="footer__title">MENU</h2><nav class="footer__links" aria-label="フッターメニュー">' +
           '<a href="products.html">ONLINE STORE</a><a href="products.html?type=rare">RARE &amp; VINTAGE</a>' +
-          '<a href="index.html#diamond-cut">DIAMOND CUT</a><a href="about.html">ABOUT</a>' +
+          '<a href="diamond-heads/">DIAMOND CUT</a><a href="about.html">ABOUT</a>' +
           '<a href="contact.html">CONTACT</a><a href="' + SHOP.instagram + '" target="_blank" rel="noopener">INSTAGRAM</a>' +
           '<a class="jp" href="' + SHOP.laws + '" target="_blank" rel="noopener">特定商取引法に基づく表記</a>' +
         "</nav></div>" +
@@ -463,9 +463,35 @@
     });
   }
 
+  /* ---------- サブフォルダのページ（<base href="../">）でのページ内リンク ---------- */
+  function initInPageLinks() {
+    // ファイルを直接開いた場合（file://）は、フォルダへのリンクに index.html を補う
+    if (location.protocol === "file:") {
+      document.addEventListener("click", (e) => {
+        const a = e.target.closest("a[href]");
+        const href = a && a.getAttribute("href");
+        if (href && /\/(#.*)?$/.test(href) && !/^[a-z]+:/i.test(href)) a.setAttribute("href", href.replace(/\/(#.*)?$/, "/index.html$1"));
+      }, true);
+    }
+    if (!document.querySelector("base")) return;
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest("a[href^='#']");
+      if (!a) return;
+      const id = a.getAttribute("href").slice(1);
+      const target = id && document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+      target.focus({ preventScroll: true });
+      history.replaceState(null, "", location.pathname + location.search + "#" + id);
+    });
+  }
+
   /* ---------- 起動 ---------- */
   mountChrome();
   initHeader();
+  initInPageLinks();
   if (page === "home") renderHome();
   renderSite();
   mountFitmentForms();

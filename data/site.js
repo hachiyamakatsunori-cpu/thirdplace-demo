@@ -25,7 +25,7 @@ window.TP_SITE = {
 
   // DIAMOND HEADS JAPAN の施工例（DIAMOND HEADS JAPAN ブログ掲載写真）
   dhjGallery: [
-    { src: "assets/diamond-heads/engine.jpg", w: 720, h: 960, label: "ENGINE", jp: "エンジンまわり", alt: "ダイヤモンドカットを施したエンジンまわりのパーツ" },
+    { src: "assets/diamond-heads/luxury-cut.jpg", w: 720, h: 960, label: "ENGINE", jp: "エンジンまわり", alt: "ダイヤモンドカットを施したエンジンまわりのパーツ" },
     { src: "assets/diamond-heads/derby-cover.jpg", w: 720, h: 960, label: "DERBY COVER", jp: "ダービーカバー", alt: "ダイヤモンドカットを施したダービーカバー" },
     { src: "assets/diamond-heads/fairing-trim.jpg", w: 720, h: 960, label: "FAIRING TRIM", jp: "ゲージトリム", alt: "ダイヤモンドカットを施したフェアリング内のゲージトリム" },
     { src: "assets/diamond-heads/muffler-end.jpg", w: 720, h: 960, label: "MUFFLER END", jp: "マフラーエンド", alt: "ダイヤモンドカットを施したマフラーエンド" }
@@ -69,5 +69,39 @@ window.TP_SITE = {
     { year: "2020", en: "CHIKUSHINO / NEW DYNO", jp: "筑紫野に移転し、ダイナモを新調" },
     { year: "2023", en: "TRIKE DYNO", jp: "トライクも測定できるシャシーダイナモを新設" },
     { year: "2026", en: "FEATURED IN CLUB HARLEY", jp: "CLUB HARLEY 2026年2月号に掲載" }
-  ]
+  ],
+
+  /*
+   * DIAMOND HEADS JAPAN 特集ページ（diamond-heads/）
+   * 写真は assets/diamond-heads/<name>.jpg / -sm.jpg（＋ .webp / .avif）。
+   * 追加するときは画像を同じ命名で置き、この配列に1行足すだけでよい。
+   * cat は将来の絞り込み用（ENGINE / AIR CLEANER / COVER / CONTROL / WHEEL / FULL CUSTOM）。
+   * 写真はすべて DIAMOND HEADS JAPAN 公式ブログ掲載の施工例。
+   */
+  diamondHeads: {
+    possibilities: [
+      { name: "cat-engine", w: 720, h: 960, en: "ENGINE", jp: "エンジン", alt: "ダイヤモンドカットを施した117エンジンまわり" },
+      { name: "cat-air-cleaner", w: 720, h: 960, en: "AIR CLEANER", jp: "エアクリーナー", alt: "ダイヤモンドカットを施したパフォーマンスマシンのエアクリーナー" },
+      { name: "cat-covers", w: 720, h: 960, en: "COVERS", jp: "カバー類", alt: "ダイヤモンドカットを施したタンクまわりのカバー" },
+      { name: "cat-wheels", w: 720, h: 960, en: "WHEELS", jp: "ホイール周り", alt: "ショーカットで仕上げたアレンネスのホイール" },
+      { name: "cat-controls", w: 720, h: 960, en: "CONTROLS", jp: "ハンドル・足回り", alt: "ダイヤモンドカットを施したグリップ" },
+      { name: "cat-mirrors", w: 960, h: 720, en: "MIRRORS", jp: "ミラー", alt: "ダイヤモンドカットを施したミラー" },
+      { name: "muffler-end", w: 720, h: 960, en: "EXHAUST", jp: "マフラー周り", alt: "ダイヤモンドカットを施したマフラーエンド", single: true },
+      { name: "cat-custom", w: 960, h: 720, en: "CUSTOM PARTS", jp: "その他カスタムパーツ", alt: "ダイヤモンドカットを施したフロアボード" }
+    ],
+    gallery: [
+      { name: "gallery-01", w: 720, h: 960, cat: "AIR CLEANER", caption: "エアクリーナー", alt: "ダイヤモンドカットを施したエアクリーナー（車両装着）" },
+      { name: "gallery-02", w: 720, h: 960, cat: "ENGINE", caption: "スポーツスター エンジン", alt: "エンジンにダイヤモンドカットを施したスポーツスター" },
+      { name: "gallery-03", w: 720, h: 960, cat: "WHEEL", caption: "トライク ホイール", alt: "ダイヤモンドカットを施したトライクのホイール" },
+      { name: "gallery-04", w: 720, h: 960, cat: "CONTROL", caption: "ハンドルまわり", alt: "ダイヤモンドカットを施したハンドルまわりとエアクリーナー" },
+      { name: "gallery-05", w: 960, h: 640, cat: "AIR CLEANER", caption: "スクリーミンイーグル エアクリーナー", alt: "黒い部分をすべてダイヤモンドカットしたエアクリーナー" },
+      { name: "gallery-06", w: 720, h: 960, cat: "CONTROL", caption: "足回り", alt: "ダイヤモンドカットを施した足回りのパーツ" },
+      { name: "gallery-07", w: 960, h: 720, cat: "ENGINE", caption: "ロッカーボックス", alt: "赤い塗装にダイヤモンドカットを施したロッカーボックス" },
+      { name: "gallery-08", w: 720, h: 960, cat: "AIR CLEANER", caption: "アレンネス エアクリーナー", alt: "ダイヤモンドカットを施したアレンネスのエアクリーナー" },
+      { name: "gallery-09", w: 720, h: 960, cat: "COVER", caption: "ダービーカバー", alt: "ダイヤモンドカットを施したダービーカバー" },
+      { name: "gallery-10", w: 720, h: 960, cat: "CONTROL", caption: "スイッチ・グリップ", alt: "ダイヤモンドカットを施したハンドルスイッチとグリップ" },
+      { name: "gallery-11", w: 960, h: 720, cat: "FULL CUSTOM", caption: "車両まるごと", alt: "車両全体のパーツにダイヤモンドカットを施したツーリングモデル" },
+      { name: "gallery-12", w: 720, h: 960, cat: "FULL CUSTOM", caption: "ツーリングモデル", alt: "各部にダイヤモンドカットを施したツーリングモデル" }
+    ]
+  }
 };

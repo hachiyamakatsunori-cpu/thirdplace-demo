@@ -25,16 +25,18 @@ demo-site/
 ├─ product.html        商品詳細（product.html?id=<handle>）
 ├─ about.html          THIRD PLACE PERFORMANCE（代表・ボンネビル・実績・年表・メディア）
 ├─ contact.html        適合相談・お問い合わせ（フォームはUIのみ）
+├─ diamond-heads/index.html  DIAMOND HEADS JAPAN／ダイヤモンドカット特集（<base href="../">で共通ファイルを参照）
 ├─ css/style.css       デザイン全体（CSS変数でトークン管理）
 ├─ js/main.js          共通: ヘッダー・メニュー・フッター生成、商品カード、適合相談フォーム、TOP描画
 ├─ js/products.js      一覧ページ: 検索・絞り込み・並び替え・URL同期
 ├─ js/product.js       詳細ページ: ギャラリー・スペック・固定購入バー・構造化データ
+├─ js/diamond-heads.js 特集ページ: 施工カテゴリー・ギャラリー描画、ライトボックス、スマホ固定CTA
 ├─ data/products.js    商品データ（JSONと同じ構造。Shopifyの項目名に対応）
 ├─ data/site.js        メディア掲載・年表・施工例ギャラリー・差し替え用写真枠のデータ
 └─ assets/
    ├─ images/favicon.svg
    ├─ images/products/ 現行ショップの商品画像（JPEG＋WebP＋AVIF）
-   ├─ diamond-heads/   ダイヤモンドカット施工例（DIAMOND HEADS JAPANブログ掲載写真）
+   ├─ diamond-heads/   ダイヤモンドカット施工例（DIAMOND HEADS JAPANブログ掲載写真。JPEG/WebP/AVIF、-sm はスマホ用）
    ├─ bonneville/      ボンネビル写真の置き場（未提供のためプレースホルダー表示）
    └─ founder/         代表写真の置き場（未提供のためプレースホルダー表示）
 ```
@@ -57,6 +59,10 @@ demo-site/
 | 9 | FEATURED / MEDIA | CLUB HARLEY・Virgin Harley・TAK'S PERFORMANCE PARTS（文字のみ・原記事リンク） |
 | 10 | INSTAGRAM | @hdthirdplace へのギャラリー導線 |
 | 11 | FOOTER | 所在地・電話・営業時間・定休日・メニュー・SNS・商標の注記 |
+
+### DIAMOND HEADS JAPAN 特集（diamond-heads/）
+HERO「光を、削り出す。」→ WHAT IS DIAMOND CUT? → BEFORE / AFTER → THREE CUT STYLES → THE POSSIBILITIES（8カテゴリー）→ ENGINE FEATURE → GALLERY（12枚・タップで拡大）→ BRAND STORY → NOT ONLY HARLEY → HOW TO ORDER → FAQ（7問）→ MAKE IT YOURS.（CTA）。スマホは画面下に小型の固定CTA。
+ナビの「DIAMOND CUT」とTOPのDIAMOND HEADS JAPAN欄のFEATUREカードからリンク。出典・使用写真・不足写真は `00_資料/DIAMOND_HEADS特集_出典と写真_20261003.md`。
 
 ### ABOUTページ（THIRD PLACE PERFORMANCE）
 BUILT IN JAPAN. / TESTED BY EXPERIENCE. / CONNECTED TO BONNEVILLE. → 代表 堤美樹雄の物語 → BONNEVILLE EXPERIENCE → PERFORMANCE, PROVEN.（85→117HP、130HP+） → HISTORY（2005〜2026） → FEATURED → SERVICES → SHOP INFO。
