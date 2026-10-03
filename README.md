@@ -23,16 +23,20 @@ demo-site/
 ├─ index.html          TOPページ
 ├─ products.html       商品一覧（検索・絞り込み）
 ├─ product.html        商品詳細（product.html?id=<handle>）
-├─ about.html          ショップについて
+├─ about.html          THIRD PLACE PERFORMANCE（代表・ボンネビル・実績・年表・メディア）
 ├─ contact.html        適合相談・お問い合わせ（フォームはUIのみ）
 ├─ css/style.css       デザイン全体（CSS変数でトークン管理）
 ├─ js/main.js          共通: ヘッダー・メニュー・フッター生成、商品カード、適合相談フォーム、TOP描画
 ├─ js/products.js      一覧ページ: 検索・絞り込み・並び替え・URL同期
 ├─ js/product.js       詳細ページ: ギャラリー・スペック・固定購入バー・構造化データ
 ├─ data/products.js    商品データ（JSONと同じ構造。Shopifyの項目名に対応）
-└─ assets/images/
-   ├─ favicon.svg
-   └─ products/        現行ショップの商品画像（最大1200pxに最適化済み）
+├─ data/site.js        メディア掲載・年表・施工例ギャラリー・差し替え用写真枠のデータ
+└─ assets/
+   ├─ images/favicon.svg
+   ├─ images/products/ 現行ショップの商品画像（JPEG＋WebP＋AVIF）
+   ├─ diamond-heads/   ダイヤモンドカット施工例（DIAMOND HEADS JAPANブログ掲載写真）
+   ├─ bonneville/      ボンネビル写真の置き場（未提供のためプレースホルダー表示）
+   └─ founder/         代表写真の置き場（未提供のためプレースホルダー表示）
 ```
 
 `products.json` を `fetch` する方式ではなく `products.js` にしたのは、HTMLをダブルクリックで開いた（file://）ときにも確実に動かすためです。中身は関数を含まない純粋なデータなので、そのままJSONに書き出せます。
@@ -42,16 +46,21 @@ demo-site/
 | # | セクション | 内容 |
 |---|---|---|
 | 1 | HERO | HARLEY-DAVIDSON PARTS & CUSTOM / NEW・USED・RARE・DIAMOND CUT。背景はダイヤモンドカット加工品の実写 |
-| – | 信頼バー | 福岡の実店舗／適合相談／送料一律1,000円／古物商許可番号（3秒で「専門店」と伝える） |
+| – | AUTHORITY STRIP | EST. 2005／DYNO TUNING SINCE 2009／USA TRAINED／BONNEVILLE 10 YEARS／DIAMOND HEADS JAPAN |
 | 2 | FIND YOUR PARTS | 車種（ワンタップで一覧へ）・カテゴリー・新品・中古/希少 |
 | 3 | FEATURED PARTS | おすすめ8件 |
 | 4 | RARE & VINTAGE | 廃盤マフラー2件の大型カード＋純正品番で探す補修部品リスト |
-| 5 | DIAMOND CUT（SHOP ORIGINAL） | 店の最大の武器であるダイヤモンドカット加工の紹介＋加工済みオリジナル商品 |
+| 5 | DIAMOND HEADS JAPAN | FROM LAS VEGAS TO FUKUOKA。出典付きの経緯、施工例4点（スクロール時に弱い光が横切る）、オリジナル商品 |
 | 6 | NEW ARRIVALS | 新着6件（Instagram風タイル） |
-| 7 | ABOUT THIRD PLACE | 短いステートメントと実績数字 |
+| 7 | THIRD PLACE PERFORMANCE | FROM FUKUOKA TO BONNEVILLE.／代表の言葉／ROAD GLIDE 85→117HP（注記付き） |
 | 8 | FITMENT SUPPORT | WILL THIS FIT MY BIKE? 適合相談フォーム（車種・年式・型式・VIN下6桁・相談内容）＋電話・LINE |
-| 9 | INSTAGRAM | @hdthirdplace へのギャラリー導線 |
-| 10 | FOOTER | 所在地・電話・営業時間・定休日・メニュー・SNS・商標の注記 |
+| 9 | FEATURED / MEDIA | CLUB HARLEY・Virgin Harley・TAK'S PERFORMANCE PARTS（文字のみ・原記事リンク） |
+| 10 | INSTAGRAM | @hdthirdplace へのギャラリー導線 |
+| 11 | FOOTER | 所在地・電話・営業時間・定休日・メニュー・SNS・商標の注記 |
+
+### ABOUTページ（THIRD PLACE PERFORMANCE）
+BUILT IN JAPAN. / TESTED BY EXPERIENCE. / CONNECTED TO BONNEVILLE. → 代表 堤美樹雄の物語 → BONNEVILLE EXPERIENCE → PERFORMANCE, PROVEN.（85→117HP、130HP+） → HISTORY（2005〜2026） → FEATURED → SERVICES → SHOP INFO。
+掲載事実の出典は `00_資料/掲載情報の出典_20261003.md`。
 
 ## 3. 実装した機能
 
@@ -62,6 +71,8 @@ demo-site/
 - **写真がない商品**: 壊れた画像を出さず、ロゴ入りの「PHOTO COMING SOON」を表示（例: 魔法シリーズ、DEMOサンプル）。読み込み失敗時も自動で差し替え
 - **デモ表示の明示**: 上部の「DEMO SITE」帯、DEMOサンプル商品の注記、カート・LINEボタンは「デモのため動作しません」と案内
 - **SEO**: ページごとの title / description、H1は各ページ1つ、alt、パンくず、商品詳細は「商品名（車種 年式）」のタイトルと schema.org Product の構造化データを自動生成
+- **画像**: AVIF → WebP → JPEG の順で配信（`<picture>`）、width/height 指定でレイアウトのずれ防止、lazy loading
+- **構造化データ**: TOPに MotorcycleRepair（住所・営業時間・創業者）、ABOUTに AboutPage
 - **アニメーション**: ページ読み込みのフェード、スクロール時のフェードアップ、PCのみのホバー。`prefers-reduced-motion` で無効化
 
 ## 4. スマホ対応
@@ -76,7 +87,7 @@ demo-site/
 - 商品詳細は価格・「適合相談」・「カートへ」の固定バーを画面下に表示
 - 見出しはスマホで最大2〜3行に収まるサイズに調整
 
-### 監査結果（2026-10-02、ヘッドレスChromeで自動検査）
+### 監査結果（2026-10-03更新、ヘッドレスChromeで自動検査）
 
 | 幅 | 横スクロール | JSエラー | 画像切れ | 12px未満の文字 |
 |---|---|---|---|---|
@@ -99,8 +110,10 @@ demo-site/
 
 ## 本番前にオーナーへ確認が必要なこと
 
-- 営業時間（10:00開始か10:30開始か。HPとブログで表記が違う）
-- 「世界で2ヶ所しかできない」等、ダイヤモンドカットの訴求表現をどこまで使うか
+- 代表の写真、ボンネビルの写真（THIRD PLACEが権利を持つもの）の提供 → `data/site.js` で差し替え
+- DIAMOND HEADS JAPANブログの施工写真4点（顧客車両を含む）をサイトに使ってよいか
+- 「世界で初めて技術皆伝を許された」（TAK'S記事の表現）をサイト本文に載せるか。現状は「技術の伝授を許され」と控えめに要約
+- Virgin Harley記事の見出しにある代表の言葉を、代表の言葉としてサイトに使ってよいか
 - 主に使うInstagramアカウント（@hdthirdplace / @thirdplace_japan）
 - 掲載画像の利用許可（一部メーカーサイトのスクリーンショットを含む）
 - 価格が税込表示かどうか

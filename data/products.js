@@ -51,11 +51,11 @@ window.TP_DATA = {
       price: 350000,
       inventory: 1,
       images: [
-        { src: "ca42_208_5.jpg", alt: "ダークプラチナに塗装したキングツアーパック 本体", fit: "cover" },
-        { src: "ca42_208_6.jpg", alt: "キングツアーパック 側面", fit: "cover" },
-        { src: "ca42_208_1.jpg", alt: "HOGWORKZ キングツアーパック 製品写真", fit: "contain" },
-        { src: "ca42_208_2.jpg", alt: "HOGWORKZ ツアーパックラック", fit: "contain" },
-        { src: "ca42_208_3.jpg", alt: "デタッチャブルキット 52300354", fit: "cover" }
+        { src: "ca42_208_5.jpg", w: 1024, h: 768, alt: "ダークプラチナに塗装したキングツアーパック 本体", fit: "cover" },
+        { src: "ca42_208_6.jpg", w: 1024, h: 768, alt: "キングツアーパック 側面", fit: "cover" },
+        { src: "ca42_208_1.jpg", w: 1024, h: 722, alt: "HOGWORKZ キングツアーパック 製品写真", fit: "contain" },
+        { src: "ca42_208_2.jpg", w: 1024, h: 843, alt: "HOGWORKZ ツアーパックラック", fit: "contain" },
+        { src: "ca42_208_3.jpg", w: 768, h: 1024, alt: "デタッチャブルキット 52300354", fit: "cover" }
       ],
       summary: "2023 CVOのダークプラチナに塗装し、ピンストライプ入り。ツアーパック・ラック・デタッチャブルの3点が揃った即装着セット。",
       description: [
@@ -85,7 +85,7 @@ window.TP_DATA = {
       tags: ["NEW"],
       price: 184800,
       inventory: 1,
-      images: [{ src: "ca1_178_1.jpg", alt: "バッサーニ ROADRAGE 2in1 マフラー ブラックを装着したソフテイル", fit: "contain" }],
+      images: [{ src: "ca1_178_1.jpg", w: 650, h: 550, alt: "バッサーニ ROADRAGE 2in1 マフラー ブラックを装着したソフテイル", fit: "contain" }],
       summary: "M8ソフテイル用の2in1マフラー。ブラック仕上げ。",
       description: [
         "M8ソフテイル（FLFB/S、FXBR/S、FXDRS）用の2in1マフラーです。",
@@ -108,9 +108,9 @@ window.TP_DATA = {
       price: 91300,
       inventory: 1,
       images: [
-        { src: "ca31_205_1.jpg", alt: "KST Patriot Bagger 12インチハンドル ブラック", fit: "contain" },
-        { src: "ca31_205_3.jpg", alt: "KST Patriot Bagger ハンドルを装着したストリートグライド", fit: "contain" },
-        { src: "ca31_205_2.jpg", alt: "KST Patriot Bagger ハンドル 装着イメージ", fit: "contain" }
+        { src: "ca31_205_1.jpg", w: 1024, h: 980, alt: "KST Patriot Bagger 12インチハンドル ブラック", fit: "contain" },
+        { src: "ca31_205_3.jpg", w: 754, h: 1023, alt: "KST Patriot Bagger ハンドルを装着したストリートグライド", fit: "contain" },
+        { src: "ca31_205_2.jpg", w: 805, h: 1023, alt: "KST Patriot Bagger ハンドル 装着イメージ", fit: "contain" }
       ],
       summary: "ストリートグライド等ツーリング用。幅が狭く、楽な姿勢で走れる12インチ。",
       description: [
@@ -134,8 +134,8 @@ window.TP_DATA = {
       price: 22000,
       inventory: 1,
       images: [
-        { src: "ca44_209_1.jpg", alt: "ダイヤモンドカット加工したスラッシンサプライのマスターシリンダーカバー", fit: "cover" },
-        { src: "ca44_209_2.jpg", alt: "スラッシンサプライ マスターシリンダーカバー パッケージ", fit: "cover" }
+        { src: "ca44_209_1.jpg", w: 768, h: 1024, alt: "ダイヤモンドカット加工したスラッシンサプライのマスターシリンダーカバー", fit: "cover" },
+        { src: "ca44_209_2.jpg", w: 768, h: 1024, alt: "スラッシンサプライ マスターシリンダーカバー パッケージ", fit: "cover" }
       ],
       summary: "Thrashin Supplyのカバーに、当店でダイヤモンドカットを施した一品。",
       description: [
@@ -160,8 +160,8 @@ window.TP_DATA = {
       price: 16500,
       inventory: 1,
       images: [
-        { src: "ca0_224_2.jpg", alt: "ダイヤモンドカット加工したコビントン リアマスターシリンダーカバー", fit: "cover" },
-        { src: "ca0_224_1.jpg", alt: "コビントン リアマスターシリンダーカバー 製品写真", fit: "contain" }
+        { src: "ca0_224_2.jpg", w: 1023, h: 1023, alt: "ダイヤモンドカット加工したコビントン リアマスターシリンダーカバー", fit: "cover" },
+        { src: "ca0_224_1.jpg", w: 1024, h: 917, alt: "コビントン リアマスターシリンダーカバー 製品写真", fit: "contain" }
       ],
       summary: "コビントンのカバーにダイヤモンドカット加工をした当店オリジナル。",
       description: ["新品のコビントン製カバーに、当店でダイヤモンドカット加工をしたオリジナル商品です。"],
@@ -181,7 +181,7 @@ window.TP_DATA = {
       tags: ["NEW"],
       price: 29150,
       inventory: 1,
-      images: [{ src: "ca31_225_1.jpg", alt: "ジョーカーマシン ビレットダービーカバー Fin コントラストカット", fit: "contain" }],
+      images: [{ src: "ca31_225_1.jpg", w: 1023, h: 1023, alt: "ジョーカーマシン ビレットダービーカバー Fin コントラストカット", fit: "contain" }],
       summary: "アルミ削り出しのダービーカバー。＋1万円でダイヤモンドカット加工も可能。",
       description: [
         "アルミ削り出しのダービーカバー。デザインはフィン、カラーはコントラストカットです。",
@@ -204,7 +204,7 @@ window.TP_DATA = {
       tags: ["NEW"],
       price: 173448,
       inventory: 1,
-      images: [{ src: "ca47_42_1.jpg", alt: "オーリンズ リアショック S46HR1C1LS", fit: "contain" }],
+      images: [{ src: "ca47_42_1.jpg", w: 600, h: 600, alt: "オーリンズ リアショック S46HR1C1LS", fit: "contain" }],
       summary: "ビューエルXBシリーズ用。日本正規品。伸び・圧・車高・プリロードを調整可能。",
       description: [
         "46mm口径ピストンを内蔵し、ホースで連結したリザーバータンクを備えます。",
@@ -227,8 +227,8 @@ window.TP_DATA = {
       price: 25300,
       inventory: 1,
       images: [
-        { src: "ca0_248_1.jpg", alt: "スーパースポーツ ウインドシールド ライトスモーク", fit: "cover" },
-        { src: "ca0_248_2.jpg", alt: "スーパースポーツ ウインドシールド 裏面", fit: "cover" }
+        { src: "ca0_248_1.jpg", w: 1200, h: 1200, alt: "スーパースポーツ ウインドシールド ライトスモーク", fit: "cover" },
+        { src: "ca0_248_2.jpg", w: 1200, h: 1200, alt: "スーパースポーツ ウインドシールド 裏面", fit: "cover" }
       ],
       summary: "ヘッドライトを回り込むスポーティーな形状。ドッキングハードウェア不要のクランプ式。",
       description: [
@@ -251,7 +251,7 @@ window.TP_DATA = {
       tags: ["RARE", "廃盤"],
       price: 110000,
       inventory: 1,
-      images: [{ src: "ca1_155_1.jpg", alt: "SAMSON フィッシュテイル スリップオンマフラーを装着したハーレー", fit: "contain" }],
+      images: [{ src: "ca1_155_1.jpg", w: 434, h: 311, alt: "SAMSON フィッシュテイル スリップオンマフラーを装着したハーレー", fit: "contain" }],
       summary: "廃盤・在庫限り。人気のフィッシュテイル。",
       description: [
         "廃盤のため在庫限りです。スリップオンなので、ノーマルのエキパイと組み合わせて使えます。社外の独立管とも組み合わせ可能です。",
@@ -273,7 +273,7 @@ window.TP_DATA = {
       tags: ["RARE", "廃盤"],
       price: 129800,
       inventory: 1,
-      images: [{ src: "ca1_85_1.jpg", alt: "クロームワークス スラッシュカット フルエキゾースト クローム", fit: "contain" }],
+      images: [{ src: "ca1_85_1.jpg", w: 1200, h: 780, alt: "クロームワークス スラッシュカット フルエキゾースト クローム", fit: "contain" }],
       summary: "廃盤・在庫限りの一本。クロームワークス独特の重低音。",
       description: ["廃盤のため、今では入手しにくいフルエキゾーストです。クロームワークス独特の重低音が魅力です。"],
       specs: { partNumber: null, oemNumber: null, color: "クローム", conditionNote: "新品・廃盤在庫", accessories: null },
@@ -292,7 +292,7 @@ window.TP_DATA = {
       tags: ["NEW"],
       price: 154000,
       inventory: 1,
-      images: [{ src: "ca1_21_1.jpg", alt: "バッサーニ ファイアースウィープを装着したダイナ", fit: "contain" }],
+      images: [{ src: "ca1_21_1.jpg", w: 600, h: 600, alt: "バッサーニ ファイアースウィープを装着したダイナ", fit: "contain" }],
       summary: "16ゲージのスチール構造。ミッド・フォワードコントロールどちらにも対応。",
       description: [
         "ミッドコントロール、フォワードコントロールに対応。16ゲージのスチール構造で、1.75インチ（44mm）ヘッドパイプに2.5インチ（64mm）のマフラーボディ。",
@@ -315,8 +315,8 @@ window.TP_DATA = {
       price: 993,
       inventory: 5,
       images: [
-        { src: "ca0_229_2.jpg", alt: "純正 スペーサーシール 45377-87 パッケージ", fit: "cover" },
-        { src: "ca0_229_1.jpg", alt: "純正 スペーサーシール 45377-87", fit: "cover" }
+        { src: "ca0_229_2.jpg", w: 1023, h: 1023, alt: "純正 スペーサーシール 45377-87 パッケージ", fit: "cover" },
+        { src: "ca0_229_1.jpg", w: 1023, h: 1023, alt: "純正 スペーサーシール 45377-87", fit: "cover" }
       ],
       summary: "純正補修部品。品番で探している方に。",
       description: ["ハーレーダビッドソン純正のスペーサーシールです。"],
@@ -337,8 +337,8 @@ window.TP_DATA = {
       price: 3300,
       inventory: 6,
       images: [
-        { src: "ca31_227_1.jpg", alt: "純正 シリンダーヘッドガスケット 16770-84D", fit: "cover" },
-        { src: "ca31_227_2.jpg", alt: "シリンダーヘッドガスケット 16770-84D 拡大", fit: "cover" }
+        { src: "ca31_227_1.jpg", w: 1023, h: 1023, alt: "純正 シリンダーヘッドガスケット 16770-84D", fit: "cover" },
+        { src: "ca31_227_2.jpg", w: 1023, h: 1023, alt: "シリンダーヘッドガスケット 16770-84D 拡大", fit: "cover" }
       ],
       summary: "純正品。通常2枚必要です。",
       description: ["純正のシリンダーヘッドガスケットです。通常2枚必要です。", "代金引換の場合はスマートレターで送れないため送料が変わります。"],
@@ -359,8 +359,8 @@ window.TP_DATA = {
       price: 1100,
       inventory: 7,
       images: [
-        { src: "ca54_206_1.jpg", alt: "純正 スターターシャフト ギアスプリング 33449-94", fit: "cover" },
-        { src: "ca54_206_2.jpg", alt: "スターターシャフト ギアスプリング 33449-94 別角度", fit: "cover" }
+        { src: "ca54_206_1.jpg", w: 768, h: 1024, alt: "純正 スターターシャフト ギアスプリング 33449-94", fit: "cover" },
+        { src: "ca54_206_2.jpg", w: 768, h: 1024, alt: "スターターシャフト ギアスプリング 33449-94 別角度", fit: "cover" }
       ],
       summary: "1994〜2006年式ビッグツイン用の純正部品。",
       description: ["純正品番 33449-94。必ず純正品番をご確認ください。", "作業には専門の知識と技術、専用工具等が必要です。"],
@@ -381,9 +381,9 @@ window.TP_DATA = {
       price: 8800,
       inventory: 8,
       images: [
-        { src: "ca44_207_1.jpg", alt: "M8ソフテイル用 リアアクスルナット", fit: "cover" },
-        { src: "ca44_207_2.jpg", alt: "リアアクスルナット 別角度", fit: "cover" },
-        { src: "ca44_207_3.jpg", alt: "リアアクスルナット 側面", fit: "cover" }
+        { src: "ca44_207_1.jpg", w: 768, h: 1024, alt: "M8ソフテイル用 リアアクスルナット", fit: "cover" },
+        { src: "ca44_207_2.jpg", w: 768, h: 1024, alt: "リアアクスルナット 別角度", fit: "cover" },
+        { src: "ca44_207_3.jpg", w: 768, h: 1024, alt: "リアアクスルナット 側面", fit: "cover" }
       ],
       summary: "M8ソフテイルのリア用アクスルナット。足元の印象を引き締める。",
       description: ["M8ソフテイル用のリアアクスルナットです。"],
@@ -404,9 +404,9 @@ window.TP_DATA = {
       price: 16720,
       inventory: 0,
       images: [
-        { src: "ca0_237_1.jpg", alt: "アレンネス ダイヤモンドグリップセット", fit: "contain" },
-        { src: "ca0_237_2.jpg", alt: "アレンネス ダイヤモンドグリップ パッケージ", fit: "cover" },
-        { src: "ca0_237_3.jpg", alt: "アレンネス グリップ エンドキャップ ゴールド", fit: "cover" }
+        { src: "ca0_237_1.jpg", w: 1024, h: 917, alt: "アレンネス ダイヤモンドグリップセット", fit: "contain" },
+        { src: "ca0_237_2.jpg", w: 1023, h: 1023, alt: "アレンネス ダイヤモンドグリップ パッケージ", fit: "cover" },
+        { src: "ca0_237_3.jpg", w: 768, h: 1024, alt: "アレンネス グリップ エンドキャップ ゴールド", fit: "cover" }
       ],
       summary: "格子柄にナール模様を入れたビンテージルック。エンドキャップはビレットアルミ。",
       description: [
@@ -430,7 +430,7 @@ window.TP_DATA = {
       tags: ["NEW", "TOOL"],
       price: 6160,
       inventory: 5,
-      images: [{ src: "ca46_203_1.jpg", alt: "HIRO KOISO RACING M8 インジェクター ディスコネクトツール", fit: "cover" }],
+      images: [{ src: "ca46_203_1.jpg", w: 473, h: 1024, alt: "HIRO KOISO RACING M8 インジェクター ディスコネクトツール", fit: "cover" }],
       summary: "M8のインジェクターコネクターを傷めず外せる専用工具。",
       description: ["HIRO KOISO RACING（AF Tools）の専用工具。使い方はショップのInstagramで紹介しています。"],
       specs: { partNumber: null, oemNumber: null, color: null, conditionNote: "新品", accessories: null },
@@ -451,10 +451,10 @@ window.TP_DATA = {
       compareAtPrice: 24000,
       inventory: 1,
       images: [
-        { src: "ca0_245_1.jpg", alt: "ハーレーダビッドソン デニムジャケット グレー", fit: "cover" },
-        { src: "ca0_245_2.jpg", alt: "デニムジャケット 内側ボア", fit: "cover" },
-        { src: "ca0_245_3.jpg", alt: "デニムジャケット タグ", fit: "cover" },
-        { src: "ca0_245_4.jpg", alt: "デニムジャケット 裾のマーク", fit: "cover" }
+        { src: "ca0_245_1.jpg", w: 1200, h: 1200, alt: "ハーレーダビッドソン デニムジャケット グレー", fit: "cover" },
+        { src: "ca0_245_2.jpg", w: 1200, h: 1200, alt: "デニムジャケット 内側ボア", fit: "cover" },
+        { src: "ca0_245_3.jpg", w: 1200, h: 1200, alt: "デニムジャケット タグ", fit: "cover" },
+        { src: "ca0_245_4.jpg", w: 1200, h: 1200, alt: "デニムジャケット 裾のマーク", fit: "cover" }
       ],
       summary: "新品タグ付き・数量限定の正規品。内側はボア仕様。",
       description: ["新品タグ付き。ハーレーダビッドソン正規品の数量限定品です（定価24,000円）。", "内側はボアになっていて、裏の裾にマークが入っています。"],
@@ -475,9 +475,9 @@ window.TP_DATA = {
       price: 1562,
       inventory: 13,
       images: [
-        { src: "ca15_215_1.jpg", alt: "ダイヤモンドカット イニシャルキーホルダー 一覧", fit: "cover" },
-        { src: "ca15_215_2.jpg", alt: "ダイヤモンドカット イニシャルキーホルダー C D E F N O P T", fit: "cover" },
-        { src: "ca15_215_3.jpg", alt: "ダイヤモンドカット イニシャルキーホルダー G H J U Y W", fit: "cover" }
+        { src: "ca15_215_1.jpg", w: 1023, h: 1023, alt: "ダイヤモンドカット イニシャルキーホルダー 一覧", fit: "cover" },
+        { src: "ca15_215_2.jpg", w: 1023, h: 1023, alt: "ダイヤモンドカット イニシャルキーホルダー C D E F N O P T", fit: "cover" },
+        { src: "ca15_215_3.jpg", w: 1023, h: 1023, alt: "ダイヤモンドカット イニシャルキーホルダー G H J U Y W", fit: "cover" }
       ],
       variants: ["B", "C", "D", "E", "F", "G", "H", "J", "N", "R", "U", "Y", "W"],
       summary: "アルミのアルファベットにダイヤモンドカット。ギフトにも。",
@@ -524,8 +524,8 @@ window.TP_DATA = {
       price: 2000,
       inventory: null,
       images: [
-        { src: "ca13_176_1.jpg", alt: "サードプレイス エイリアン Tシャツ バックプリント", fit: "cover" },
-        { src: "ca13_176_2.jpg", alt: "サードプレイス エイリアン Tシャツ フロント", fit: "cover" }
+        { src: "ca13_176_1.jpg", w: 1024, h: 768, alt: "サードプレイス エイリアン Tシャツ バックプリント", fit: "cover" },
+        { src: "ca13_176_2.jpg", w: 1024, h: 768, alt: "サードプレイス エイリアン Tシャツ フロント", fit: "cover" }
       ],
       summary: "ショップオリジナルのTシャツ。",
       description: ["サードプレイスのオリジナルTシャツです。"],

@@ -100,10 +100,21 @@
     return '<div class="ph" role="img" aria-label="' + esc(p.title) + '（写真準備中）">' + LOGO_MARK.replace('class="logo__mark"', "") +
       '<span class="ph__label">PHOTO COMING SOON</span><span class="ph__cat">' + esc((catById[p.productType] || {}).label || "") + "</span></div>";
   }
+  // AVIF / WebP を優先し、非対応ブラウザは JPEG。width/height でレイアウトのずれを防ぐ
+  function pictureHTML(src, alt, o) {
+    o = o || {};
+    const base = src.replace(/\.(jpe?g|png)$/i, "");
+    const size = o.w && o.h ? ' width="' + o.w + '" height="' + o.h + '"' : "";
+    return "<picture>" +
+      (o.avif === false ? "" : '<source type="image/avif" srcset="' + esc(base) + '.avif">') +
+      (o.webp === false ? "" : '<source type="image/webp" srcset="' + esc(base) + '.webp">') +
+      '<img src="' + esc(src) + '" alt="' + esc(alt || "") + '"' + size +
+      (o.eager ? ' fetchpriority="high"' : ' loading="lazy"') + ' decoding="async"' +
+      (o.fallback ? ' data-fallback="' + esc(o.fallback) + '"' : "") + "></picture>";
+  }
   function imgTag(image, p, opts) {
     const o = opts || {};
-    return '<img src="' + IMG + esc(image.src) + '" alt="' + esc(image.alt || p.title) + '"' +
-      (o.eager ? ' fetchpriority="high"' : ' loading="lazy"') + ' decoding="async" data-fallback="' + esc(p.handle) + '">';
+    return pictureHTML(IMG + image.src, image.alt || p.title, { w: image.w, h: image.h, eager: o.eager, fallback: p.handle });
   }
   function isPlate(image) { return image && image.fit === "contain"; }
 
@@ -130,9 +141,10 @@
     const el = e.target;
     if (!(el instanceof HTMLImageElement) || !el.dataset.fallback) return;
     const p = byHandle[el.dataset.fallback];
-    const box = el.parentElement;
+    const target = el.parentElement && el.parentElement.tagName === "PICTURE" ? el.parentElement : el;
+    const box = target.parentElement;
     if (box) box.classList.remove("is-plate");
-    el.outerHTML = placeholderHTML(p || { title: el.alt, productType: "" });
+    target.outerHTML = placeholderHTML(p || { title: el.alt, productType: "" });
   }, true);
 
   /* ---------- 共通UI: ヘッダー / メニュー / フッター ---------- */
@@ -141,7 +153,7 @@
     { href: "products.html", en: "SHOP", jp: "パーツを探す", key: "products" },
     { href: "products.html?type=rare", en: "RARE & VINTAGE", jp: "廃盤・希少パーツ", key: "" },
     { href: "index.html#diamond-cut", en: "DIAMOND CUT", jp: "ダイヤモンドカット加工", key: "" },
-    { href: "about.html", en: "ABOUT", jp: "ショップについて", key: "about" },
+    { href: "about.html", en: "ABOUT", jp: "THIRD PLACEについて", key: "about" },
     { href: "contact.html", en: "CONTACT", jp: "適合相談・お問い合わせ", key: "contact" }
   ];
 
@@ -400,18 +412,65 @@
         ["ca13_176_1.jpg", "#ショップT", "サードプレイスのオリジナルTシャツ"]
       ];
       gal.innerHTML = shots.map((s) =>
-        '<a href="' + SHOP.instagram + '" target="_blank" rel="noopener" class="reveal"><img src="' + IMG + s[0] + '" alt="' + esc(s[2]) + '" loading="lazy" decoding="async"><span class="gallery__tag">' + esc(s[1]) + "</span></a>"
+        '<a href="' + SHOP.instagram + '" target="_blank" rel="noopener" class="reveal">' + pictureHTML(IMG + s[0], s[2]) + '<span class="gallery__tag">' + esc(s[1]) + "</span></a>"
       ).join("");
     }
+  }
+
+  /* ---------- 共通セクション（data/site.js） ---------- */
+  function photoPlaceholder(label, cls) {
+    return '<div class="photo-ph ' + (cls || "") + '" role="img" aria-label="' + esc(label) + '（写真準備中）">' +
+      '<span class="photo-ph__label">' + esc(label) + '</span><span class="photo-ph__note">PHOTO COMING SOON</span></div>';
+  }
+  function renderSite() {
+    const SITE = window.TP_SITE;
+    if (!SITE) return;
+
+    $$("[data-render='media']").forEach((box) => {
+      box.innerHTML = SITE.media.map((m) =>
+        '<li class="media-row reveal"><a href="' + esc(m.url) + '" target="_blank" rel="noopener">' +
+          '<span class="media-row__name">' + esc(m.name) + (m.via ? '<small> / ' + esc(m.via) + "</small>" : "") + "</span>" +
+          '<span class="media-row__year">' + esc(m.year) + "</span>" +
+          '<span class="media-row__body"><b>' + esc(m.title) + "</b><span>" + esc(m.desc) + "</span></span>" +
+          '<span class="media-row__go">READ ARTICLE ' + icon("arrow") + '<span class="visually-hidden">（外部サイト）</span></span>' +
+        "</a></li>").join("");
+    });
+
+    $$("[data-render='dhj-gallery']").forEach((box) => {
+      box.innerHTML = SITE.dhjGallery.map((g) =>
+        '<figure class="dhj-item sheen reveal">' +
+          (g.src ? pictureHTML(g.src, g.alt, { w: g.w, h: g.h, webp: g.webp, avif: g.avif }) : photoPlaceholder(g.label)) +
+          '<figcaption><span class="en">' + esc(g.label) + "</span>" + esc(g.jp) + "</figcaption></figure>").join("");
+    });
+
+    $$("[data-render='history']").forEach((box) => {
+      box.innerHTML = SITE.history.map((h) =>
+        '<li class="tl-item reveal"><span class="tl-item__year">' + esc(h.year) + '</span><div class="tl-item__body"><b>' + esc(h.en) + "</b><span>" + esc(h.jp) + "</span></div></li>").join("");
+    });
+
+    $$("[data-render='bonneville']").forEach((box) => {
+      box.innerHTML = SITE.bonneville.map((b, i) =>
+        '<figure class="salt-photo salt-photo--' + (i + 1) + ' reveal">' +
+          (b.src ? pictureHTML(b.src, b.caption, { w: b.w, h: b.h, webp: b.webp, avif: b.avif }) : photoPlaceholder(b.caption, "photo-ph--salt")) +
+        "</figure>").join("");
+    });
+
+    $$("[data-render='founder-photo']").forEach((box) => {
+      const f = SITE.founder;
+      box.innerHTML = f.photo
+        ? pictureHTML(f.photo.src, f.photo.alt, { w: f.photo.w, h: f.photo.h, webp: f.photo.webp, avif: f.photo.avif })
+        : photoPlaceholder(f.en + " — " + f.role, "photo-ph--portrait");
+    });
   }
 
   /* ---------- 起動 ---------- */
   mountChrome();
   initHeader();
   if (page === "home") renderHome();
+  renderSite();
   mountFitmentForms();
   $$("[data-shop]").forEach((el) => { const v = SHOP[el.dataset.shop]; if (v) el.textContent = v; });
   observeReveal();
 
-  window.TP = { DATA, SHOP, $, $$, esc, yen, icon, priceText, productUrl, fitShort, cardHTML, imgTag, isPlate, placeholderHTML, displayTags, tagHTML, catById, modelById, byHandle, observeReveal, toast };
+  window.TP = { DATA, SHOP, $, $$, esc, yen, icon, priceText, productUrl, fitShort, cardHTML, imgTag, pictureHTML, isPlate, placeholderHTML, displayTags, tagHTML, catById, modelById, byHandle, observeReveal, toast };
 })();

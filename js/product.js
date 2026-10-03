@@ -3,7 +3,7 @@
    ========================================================================== */
 (function () {
   "use strict";
-  const { DATA, SHOP, $, $$, esc, yen, icon, priceText, productUrl, cardHTML, imgTag, isPlate, placeholderHTML, displayTags, tagHTML, catById, modelById, byHandle, observeReveal, toast } = window.TP;
+  const { DATA, SHOP, $, $$, esc, yen, icon, priceText, productUrl, cardHTML, imgTag, pictureHTML, isPlate, placeholderHTML, displayTags, tagHTML, catById, modelById, byHandle, observeReveal, toast } = window.TP;
 
   const root = $("[data-pdp]");
   const id = new URLSearchParams(location.search).get("id");
@@ -37,7 +37,7 @@
     : '<div class="g-slide">' + placeholderHTML(p) + "</div>";
   const thumbs = images.length > 1
     ? '<div class="g-thumbs" role="tablist" aria-label="商品画像">' + images.map((img, i) =>
-        '<button type="button" class="g-thumb' + (isPlate(img) ? " is-plate" : "") + '" data-go="' + i + '" aria-label="画像' + (i + 1) + 'を表示"' + (i === 0 ? ' aria-current="true"' : "") + '><img src="' + DATA.meta.imageBase + esc(img.src) + '" alt="" loading="lazy" decoding="async"></button>').join("") + "</div>"
+        '<button type="button" class="g-thumb' + (isPlate(img) ? " is-plate" : "") + '" data-go="' + i + '" aria-label="画像' + (i + 1) + 'を表示"' + (i === 0 ? ' aria-current="true"' : "") + '>' + pictureHTML(DATA.meta.imageBase + img.src, "", { w: img.w, h: img.h }) + "</button>").join("") + "</div>"
     : "";
 
   /* ---------- スペック ---------- */
