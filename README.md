@@ -24,7 +24,8 @@ demo-site/
 ├─ products.html       商品一覧（検索・絞り込み）
 ├─ product.html        商品詳細（product.html?id=<handle>）
 ├─ about.html          THIRD PLACE PERFORMANCE（代表・ボンネビル・実績・年表・メディア）
-├─ contact.html        適合相談・お問い合わせ（フォームはUIのみ）
+├─ contact.html        適合相談・お問い合わせ（フォームはUIのみ。?bike=<id> で車両の問い合わせ用に切り替わる）
+├─ used.html           中古車両の詳細（used.html?id=<id>）
 ├─ diamond-heads/index.html  DIAMOND HEADS JAPAN／ダイヤモンドカット特集（<base href="../">で共通ファイルを参照）
 ├─ css/style.css       デザイン全体（CSS変数でトークン管理）
 ├─ js/main.js          共通: ヘッダー・メニュー・フッター生成、商品カード、適合相談フォーム、TOP描画
@@ -32,6 +33,7 @@ demo-site/
 ├─ js/product.js       詳細ページ: ギャラリー・スペック・固定購入バー・構造化データ
 ├─ js/diamond-heads.js 特集ページ: 施工カテゴリー・ギャラリー描画、ライトボックス、スマホ固定CTA
 ├─ data/products.js    商品データ（JSONと同じ構造。Shopifyの項目名に対応）
+├─ data/bikes.js       中古車両データ（null の項目は「確認中」と表示）
 ├─ data/site.js        メディア掲載・年表・施工例ギャラリー・差し替え用写真枠のデータ
 └─ assets/
    ├─ images/favicon.svg
@@ -59,6 +61,13 @@ demo-site/
 | 9 | FEATURED / MEDIA | CLUB HARLEY・Virgin Harley・TAK'S PERFORMANCE PARTS（文字のみ・原記事リンク） |
 | 10 | INSTAGRAM | @hdthirdplace へのギャラリー導線 |
 | 11 | FOOTER | 所在地・電話・営業時間・定休日・メニュー・SNS・商標の注記 |
+
+### USED MOTORCYCLES（中古車両）
+TOPの「03 — USED MOTORCYCLES」に先頭の1台を大きく表示し、`used.html?id=<id>` の詳細へ。詳細は メイン写真 → 車両名・価格・主要スペック → GALLERY → CUSTOM / EQUIPMENT → CONDITION → VEHICLE INFORMATION → 問い合わせ の順。
+- 車両の追加・更新は `data/bikes.js` だけを編集する。未確定の項目は `null` のままにすると「確認中」と表示される
+- 価格が決まったら `price: 1234000`（数値）。金額を出さない場合は `priceLabel: "ASK"`
+- 写真は `assets/used/` に `<id>-01.jpg` と `-sm.jpg`（＋ .webp / .avif）。公開前にナンバー等をぼかす
+- 2台目以降はTOPで1台目の下に小さく並ぶ
 
 ### DIAMOND HEADS JAPAN 特集（diamond-heads/）
 HERO「光を、削り出す。」→ WHAT IS DIAMOND CUT? → BEFORE / AFTER → THREE CUT STYLES → THE POSSIBILITIES（8カテゴリー）→ ENGINE FEATURE → GALLERY（12枚・タップで拡大）→ BRAND STORY → NOT ONLY HARLEY → HOW TO ORDER → FAQ（7問）→ MAKE IT YOURS.（CTA）。スマホは画面下に小型の固定CTA。

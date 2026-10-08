@@ -333,6 +333,18 @@
         if (item.fitment && item.fitment.models.length === 1) form.model.value = item.fitment.models[0];
       }
       if (params.get("topic") === "diamond") form.message.value = "ダイヤモンドカット加工について相談したいです。\n加工したいパーツ：";
+      const bike = params.get("bike") && bikeById[params.get("bike")];
+      if (bike) {
+        form.dataset.mode = "bike";
+        [form.model, form.vin].forEach((el) => { el.closest(".form__row").hidden = true; });
+        const itemLabel = form.item.closest(".field").querySelector(".field__label");
+        itemLabel.firstChild.textContent = "問い合わせる車両";
+        itemLabel.querySelector(".field__opt").hidden = true;
+        form.item.readOnly = true;
+        form.item.value = bikeName(bike) + "（" + bike.id + "）";
+        form.message.placeholder = "例：見学したいです。詳細が分かったら教えてください。";
+        $("button[type=submit]", form).lastChild.textContent = "この車両について問い合わせる";
+      }
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -341,18 +353,68 @@
           el.closest(".field").classList.toggle("is-invalid", !ok);
           if (!ok && !firstBad) firstBad = el;
         };
-        ["model", "year", "message", "name", "contact"].forEach((n) => check(form[n], form[n].value.trim() !== ""));
-        check(form.vin, form.vin.value.trim() === "" || /^[A-Za-z0-9]{6}$/.test(form.vin.value.trim()));
+        const isBike = form.dataset.mode === "bike";
+        (isBike ? ["message", "name", "contact"] : ["model", "year", "message", "name", "contact"]).forEach((n) => check(form[n], form[n].value.trim() !== ""));
+        if (!isBike) check(form.vin, form.vin.value.trim() === "" || /^[A-Za-z0-9]{6}$/.test(form.vin.value.trim()));
         if (firstBad) { firstBad.focus(); return; }
-        const model = form.model.selectedOptions[0].textContent;
-        $("[data-done-summary]", done).textContent = model + "・" + form.year.value + "年式" + (form.item.value ? "／" + form.item.value : "") + " についてのご相談を受け付けました。";
+        $("[data-done-summary]", done).textContent = isBike
+          ? form.item.value + " についてのお問い合わせを受け付けました。"
+          : form.model.selectedOptions[0].textContent + "・" + form.year.value + "年式" + (form.item.value ? "／" + form.item.value : "") + " についてのご相談を受け付けました。";
         form.hidden = true;
         done.classList.add("is-shown");
         done.focus();
       });
       form.addEventListener("input", (e) => { const fld = e.target.closest(".field"); if (fld) fld.classList.remove("is-invalid"); });
-      $("[data-form-reset]", done).addEventListener("click", () => { form.reset(); form.hidden = false; done.classList.remove("is-shown"); form.model.focus(); });
+      $("[data-form-reset]", done).addEventListener("click", () => { const keep = form.item.value; form.reset(); if (form.dataset.mode === "bike") form.item.value = keep; form.hidden = false; done.classList.remove("is-shown"); (form.dataset.mode === "bike" ? form.message : form.model).focus(); });
     });
+  }
+
+  /* ---------- 中古車両（data/bikes.js） ---------- */
+  const BIKES = window.TP_BIKES || [];
+  const PENDING = "確認中";
+  const bikeById = Object.fromEntries(BIKES.map((b) => [b.id, b]));
+  const bikeName = (b) => b.name || "USED HARLEY-DAVIDSON";
+  const bikeValue = (v) => (v === null || v === undefined || v === "" ? PENDING : v);
+  const bikePrice = (b) => (b.priceLabel ? b.priceLabel : typeof b.price === "number" ? yen(b.price) : PENDING);
+  const bikeUrl = (b) => "used.html?id=" + encodeURIComponent(b.id);
+  const BIKE_STATUS = { pending: "DETAILS COMING SOON", available: "AVAILABLE", sold: "SOLD" };
+  function bikePic(img, sizes, o) {
+    const n = "assets/used/" + img.name;
+    const set = (ext) => n + "-sm." + ext + " 600w, " + n + "." + ext + " " + img.w + "w";
+    return "<picture>" +
+      '<source type="image/avif" srcset="' + set("avif") + '" sizes="' + sizes + '">' +
+      '<source type="image/webp" srcset="' + set("webp") + '" sizes="' + sizes + '">' +
+      '<img src="' + n + '.jpg" srcset="' + set("jpg") + '" sizes="' + sizes + '" width="' + img.w + '" height="' + img.h + '" alt="' + esc(img.alt) + '"' +
+      (o && o.focus ? ' style="object-position:' + esc(img.focus || "50% 50%") + '"' : "") +
+      (o && o.eager ? ' fetchpriority="high"' : ' loading="lazy"') + ' decoding="async"></picture>';
+  }
+  function bikeSpecs(b) {
+    return [["PRICE", "価格", bikePrice(b)], ["YEAR", "年式", bikeValue(b.year)], ["MILEAGE", "走行距離", bikeValue(b.mileage)], ["INSPECTION", "車検", bikeValue(b.inspection)]];
+  }
+
+  function renderUsedHome() {
+    const box = $("[data-render='used-bikes']");
+    if (!box) return;
+    const section = box.closest("section");
+    if (!BIKES.length) { if (section) section.hidden = true; return; }
+    const [first, ...rest] = BIKES;
+    const specs = bikeSpecs(first).map((s) =>
+      '<div class="' + (s[2] === PENDING ? "is-pending" : "") + '"><dt><span class="en">' + s[0] + "</span>" + s[1] + "</dt><dd>" + esc(s[2]) + "</dd></div>").join("");
+    box.innerHTML =
+      '<article class="used-feature reveal">' +
+        '<a class="used-feature__media" href="' + bikeUrl(first) + '" tabindex="-1" aria-hidden="true">' + bikePic(first.images[0], "(min-width: 900px) 58vw, 100vw", { focus: true }) + "</a>" +
+        '<div class="used-feature__body">' +
+          '<p class="used-status">' + esc(BIKE_STATUS[first.status] || "") + (first.status === "pending" ? "<span>車両詳細確認中</span>" : "") + "</p>" +
+          '<h3 class="used-feature__name"><a href="' + bikeUrl(first) + '">' + esc(bikeName(first)) + "</a></h3>" +
+          (first.status === "pending" ? '<p class="used-feature__text">入庫した中古Harley-Davidson。<br>車種・年式・走行距離・販売価格など、詳細は現在確認中です。</p>' : "") +
+          '<dl class="used-specs">' + specs + "</dl>" +
+          '<div class="used-feature__cta"><a class="btn btn--primary" href="' + bikeUrl(first) + '">車両の詳細を見る ' + icon("arrow", "icon-arrow") + "</a>" +
+          '<a class="text-link" href="contact.html?bike=' + encodeURIComponent(first.id) + '">この車両について問い合わせる ' + icon("arrow") + "</a></div>" +
+        "</div>" +
+      "</article>" +
+      (rest.length ? '<ul class="used-more">' + rest.map((b) =>
+        '<li class="reveal"><a href="' + bikeUrl(b) + '"><span class="used-more__media">' + bikePic(b.images[0], "(min-width: 900px) 30vw, 50vw", { focus: true }) + "</span>" +
+        '<span class="used-more__name">' + esc(bikeName(b)) + '</span><span class="used-more__price">' + esc(bikePrice(b)) + "</span></a></li>").join("") + "</ul>" : "");
   }
 
   /* ---------- TOPページ ---------- */
@@ -492,11 +554,12 @@
   mountChrome();
   initHeader();
   initInPageLinks();
-  if (page === "home") renderHome();
+  if (page === "home") { renderHome(); renderUsedHome(); }
   renderSite();
   mountFitmentForms();
   $$("[data-shop]").forEach((el) => { const v = SHOP[el.dataset.shop]; if (v) el.textContent = v; });
   observeReveal();
 
-  window.TP = { DATA, SHOP, $, $$, esc, yen, icon, priceText, productUrl, fitShort, cardHTML, imgTag, pictureHTML, isPlate, placeholderHTML, displayTags, tagHTML, catById, modelById, byHandle, observeReveal, toast };
+  window.TP = { BIKES, bikeById, bikeName, bikeValue, bikePrice, bikePic, bikeSpecs, BIKE_STATUS, PENDING,
+    DATA, SHOP, $, $$, esc, yen, icon, priceText, productUrl, fitShort, cardHTML, imgTag, pictureHTML, isPlate, placeholderHTML, displayTags, tagHTML, catById, modelById, byHandle, observeReveal, toast };
 })();

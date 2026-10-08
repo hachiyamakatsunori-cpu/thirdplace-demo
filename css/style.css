@@ -63,6 +63,7 @@ body {
 body.is-locked { overflow: hidden; }
 img { display: block; max-width: 100%; height: auto; }
 picture { display: contents; }
+[hidden] { display: none !important; }
 a { color: inherit; text-decoration: none; }
 button, input, select, textarea { font: inherit; color: inherit; }
 button { cursor: pointer; }
@@ -1053,6 +1054,70 @@ ul, ol { padding: 0; list-style: none; }
 .dh-feature svg { width: 20px; height: 20px; color: var(--accent); }
 @media (hover: hover) { .dh-feature:hover { border-color: var(--accent); } }
 @media (min-width: 900px) { .dh-feature { grid-template-columns: 160px minmax(0, 1fr) auto; gap: 28px; padding: 16px 28px 16px 16px; margin-top: 24px; } .dh-feature b { font-size: var(--fs-lg); } }
+
+/* ---------- Used motorcycles (TOP section + used.html) ---------- */
+.used-status { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-family: var(--font-en); font-weight: 600; font-size: var(--fs-xs); letter-spacing: 0.2em; color: var(--text); padding: 6px 12px; border: 1px solid var(--border); border-radius: 2px; align-self: flex-start; }
+.used-status span { font-family: var(--font-jp); font-weight: 500; letter-spacing: 0.04em; color: var(--sub); }
+.used-specs { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); }
+.used-specs div { padding: 14px 12px 14px 0; border-bottom: 1px solid var(--border-soft); min-width: 0; }
+.used-specs div:nth-child(even) { padding-left: 14px; border-left: 1px solid var(--border-soft); }
+.used-specs dt { font-size: var(--fs-xs); color: var(--sub); line-height: 1.5; }
+.used-specs dt .en { display: block; font-weight: 600; letter-spacing: 0.18em; color: var(--text); }
+.used-specs dd { font-family: var(--font-en); font-weight: 600; font-size: 1.375rem; line-height: 1.3; margin-top: 4px; }
+.used-specs .is-pending dd, .used-specs dd.is-pending { font-family: var(--font-jp); font-weight: 500; font-size: var(--fs-sm); color: var(--sub); }
+
+.used-feature { display: grid; gap: 24px; }
+.used-feature__media { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius); background: var(--gunmetal); }
+.used-feature__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+.used-feature__body { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.used-feature__name { font-family: var(--font-en); font-weight: 700; font-size: clamp(2rem, 9vw, 3.25rem); line-height: 0.95; letter-spacing: 0.02em; }
+.used-feature__text { color: #d6d2ca; }
+.used-feature__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 8px; }
+@media (hover: hover) { .used-feature:hover .used-feature__media img { transform: scale(1.03); } .used-feature__name a:hover { color: var(--accent); } }
+@media (min-width: 900px) {
+  .used-feature { grid-template-columns: 7fr 5fr; gap: 48px; align-items: center; }
+  .used-feature__media { aspect-ratio: 16 / 11; }
+}
+.used-more { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 32px; }
+.used-more a { display: grid; gap: 6px; }
+.used-more__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius); background: var(--gunmetal); }
+.used-more__media img { width: 100%; height: 100%; object-fit: cover; }
+.used-more__name { font-family: var(--font-en); font-weight: 600; letter-spacing: 0.08em; }
+.used-more__price { color: var(--sub); font-size: var(--fs-sm); }
+@media (min-width: 900px) { .used-more { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; } }
+
+.used-top { display: grid; gap: 28px; }
+.used-main { position: relative; margin: 0 calc(var(--gutter) * -1); aspect-ratio: 4 / 5; overflow: hidden; background: var(--gunmetal); }
+.used-main img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+.used-info { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.used-info__name { font-family: var(--font-en); font-weight: 700; font-size: clamp(2.25rem, 10vw, 3.5rem); line-height: 0.95; letter-spacing: 0.02em; }
+.used-info__lead { color: #d6d2ca; }
+.used-price { display: flex; align-items: baseline; gap: 16px; padding-block: 8px; }
+.used-price .en { font-weight: 600; letter-spacing: 0.2em; font-size: var(--fs-sm); color: var(--sub); }
+.used-price__value { font-family: var(--font-en); font-weight: 600; font-size: 2.25rem; line-height: 1.1; }
+.used-price__value.is-pending { font-family: var(--font-jp); font-weight: 700; font-size: var(--fs-lg); }
+.used-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.used-gallery__btn { position: relative; display: block; width: 100%; aspect-ratio: 3 / 4; padding: 0; border: 0; border-radius: var(--radius); overflow: hidden; background: var(--gunmetal); cursor: zoom-in; }
+.used-gallery__btn img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+@media (hover: hover) { .used-gallery__btn:hover img { transform: scale(1.04); } }
+.used-sections { max-width: 880px; }
+.used-pending { color: var(--sub); padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border-soft); }
+.used-list { border-top: 1px solid var(--border); }
+.used-list li { padding: 12px 0; border-bottom: 1px solid var(--border-soft); }
+.spec dd.is-pending { color: var(--sub); }
+.used-cta { margin-top: 64px; padding: 40px 20px; border: 1px solid var(--border); border-radius: var(--radius); background: linear-gradient(160deg, var(--gunmetal), var(--bg) 70%); display: flex; flex-direction: column; gap: 14px; }
+.used-cta__text { color: #d6d2ca; }
+.used-cta__buttons { display: grid; gap: 12px; margin-top: 4px; }
+.used-cta__info { color: var(--sub); font-size: var(--fs-xs); }
+@media (min-width: 600px) { .used-cta__buttons { grid-template-columns: auto auto; justify-content: start; } }
+@media (min-width: 900px) {
+  .used-top { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: start; }
+  .used-main { margin: 0; border-radius: var(--radius); }
+  .used-info { position: sticky; top: calc(var(--header-h) + 24px); }
+  .used-gallery { gap: 16px; max-width: 880px; }
+  .used-cta { padding: 56px 48px; }
+}
+.used-sticky .sticky-buy__price { font-family: var(--font-jp); font-size: 1rem; font-weight: 700; }
 
 /* ---------- Motion ---------- */
 .sheen { isolation: isolate; }
